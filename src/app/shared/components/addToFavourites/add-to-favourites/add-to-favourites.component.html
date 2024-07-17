@@ -1,0 +1,5 @@
+<button (click)="handleLike()"
+    [ngClass]="{btn: true,'btn-sm':true,'btn-primary':isFavourited,'btn-outline-primary':!isFavourited}">
+<i class="ion-heart">
+    <span> &nbsp; {{favouritedCount}}</span>
+</i></button>

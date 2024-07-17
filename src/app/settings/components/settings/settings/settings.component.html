@@ -1,0 +1,32 @@
+<ng-container *ngIf ="data$ | async as data">
+    <div class="settings-page" *ngIf="currentUser">
+    <div class="container page">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-xs-12">
+                <h1 class="text-xs-center">Settings</h1>
+                <!-- <mc-backend-error-messages *ngIf="data.backendError" [backendError]="data.backendError"></mc-backend-error-messages> -->
+            <form [formGroup] ="form" (ngSubmit)="submit()">
+                <fieldset>
+                    <fieldset class="form-group">
+                        <input type="text" class="form-control form-control-lg" formControlName="image" placeholder="image">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input type="text" class="form-control form-control-lg" formControlName="username" placeholder="Username">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input type="text" class="form-control form-control-lg" formControlName="bio" placeholder="Short bio about">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input type="text" class="form-control form-control-lg" formControlName="email" placeholder="Email">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input type="password" class="form-control form-control-lg" formControlName="password" placeholder="New Password">
+                    </fieldset>
+                    <button type="submit" class="btn btn-lg btn-primary pull-xs-right" [disabled]="form.invalid || data.isSubmitting">Update Settings</button>
+                </fieldset>
+            </form>
+            <hr/>
+            <button class="btn btn-outline-danger" (click)="logout()">Click here to logout</button>
+            </div>
+        </div>
+    </div></div>

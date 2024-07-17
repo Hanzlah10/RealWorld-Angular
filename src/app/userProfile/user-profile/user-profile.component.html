@@ -1,0 +1,39 @@
+ 
+<ng-container *ngIf="data$ | async as data">
+    <div class="profile-page" *ngIf="data.userProfile">
+        <div class="user-info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-10 offset-md-1">
+                        <img [src]="data.userProfile.image" alt="" class="user-img">
+                        <h4>{{data.userProfile.username}}</h4>
+                        <p>{{data.userProfile.bio}}</p>
+                    </div>
+                    FOLLOW USER BUTTON
+                    <a *ngIf="data.isCurrentUserProfile" class="btn btn-sm btn-outline-secondary action-btn"
+                        routerLink="/settings">
+                        Edit Profile </a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-10 offset-md-1">
+                    <div class="articles-toggler">
+                        <ul class="nav nav-pills outline-active">
+                            <li>
+                                <a [routerLink]="['/profiles', data.userProfile.username]" class="nav-link"
+                                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Posts</a>
+                            </li>
+                            <li>
+                                <a [routerLink]="['/profiles', data.userProfile.username,'favorites']" class="nav-link"
+                                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Favorites Posts</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <mc-stream [apiUrl] ='getApiUrl()'></mc-stream>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
