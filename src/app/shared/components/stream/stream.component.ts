@@ -43,7 +43,7 @@ import { environment } from 'src/environments/environment';
     AddToFavouritesComponent,
   ],
 })
-export class StreamComponent implements OnInit, OnChanges {
+export class StreamComponent implements OnInit {
   @Input() apiUrl: string = '';
   data$ = combineLatest({
     isLoading: this.store.select(selectIsLoading),
@@ -57,7 +57,7 @@ export class StreamComponent implements OnInit, OnChanges {
     private store: Store,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
   fetchStream(): void {
     const offset = this.currentPage * this.limit - this.limit;
     const parsedUrl = queryString.parseUrl(this.apiUrl);
@@ -67,9 +67,9 @@ export class StreamComponent implements OnInit, OnChanges {
       ...parsedUrl.query,
     });
     const apiWithParams = `${parsedUrl.url}?${stringifiedParams}`;
-    
     this.store.dispatch(streamActions.getStream({ url: apiWithParams }));
   }
+
   ngOnInit(): void {
     this.store.dispatch(streamActions.getStream({ url: this.apiUrl }));
     console.log(this.data$);
@@ -79,12 +79,15 @@ export class StreamComponent implements OnInit, OnChanges {
       this.fetchStream();
     });
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    const isApiUrlChanged =
-      !changes['apiUrl'].firstChange &&
-      changes['apiUrl'].currentValue !== changes['apiUrl'].previousValue;
-    if (isApiUrlChanged) {
-      this.fetchStream();
-    }
-  }
-}
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   // console.log(this.apiUrl);
+  //   const isApiUrlChanged =
+  //     !changes['apiUrl'].firstChange &&
+  //     changes['apiUrl'].currentValue !== changes['apiUrl'].previousValue;
+  //   console.log(isApiUrlChanged);
+
+  //   if (!isApiUrlChanged) {
+  //     this.fetchStream();
+  //   }
+  // }
+} 

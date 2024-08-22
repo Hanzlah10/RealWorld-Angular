@@ -9,7 +9,7 @@ import { authFeatureKey, authReducer } from './app/auth/store/reducer';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideEffects } from '@ngrx/effects';
 import * as authEffects from './app/auth/store/effect'
-import * as streamEffects from'./app/shared/components/stream/store/effect'
+import * as streamEffects from './app/shared/components/stream/store/effect'
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { authInterceptor } from './app/shared/services/authInterceptor';
 import { streamFeatureKey, streamReducer } from './app/shared/components/stream/store/reducer';
@@ -18,26 +18,27 @@ import * as PopularTagsEffects from './app/shared/components/populartags/store/e
 import * as addToFavoritesEffects from './app/shared/components/addToFavourites/add-to-favourites/store/effects'
 import { AddtoFavoritesService } from './app/shared/components/addToFavourites/service/addto-favorites.service';
 import { PopularTagsFeatureKey, popularTagsReducer } from './app/shared/components/populartags/store/reducer';
+
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouterStore(),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideRouter(appRoutes),
     provideStore({
-      router:routerReducer
+      router: routerReducer
     }),
-    provideEffects(PopularTagsEffects,authEffects,streamEffects,addToFavoritesEffects),
+    provideEffects(PopularTagsEffects, authEffects, streamEffects, addToFavoritesEffects),
     provideState(authFeatureKey, authReducer),
-    provideState(streamFeatureKey,streamReducer),
-    provideState(PopularTagsFeatureKey,popularTagsReducer),
+    provideState(streamFeatureKey, streamReducer),
+    provideState(PopularTagsFeatureKey, popularTagsReducer),
     provideStoreDevtools({
-        maxAge: 25,
-        logOnly: !isDevMode(),
-        autoPause: true,
-        trace: false,
-        traceLimit: 75,
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      autoPause: true,
+      trace: false,
+      traceLimit: 75,
     }),
     AddtoFavoritesService,
     provideEffects()
-],
+  ],
 });
