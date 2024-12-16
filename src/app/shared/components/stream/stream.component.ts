@@ -44,20 +44,24 @@ import { environment } from 'src/environments/environment';
   ],
 })
 export class StreamComponent implements OnInit {
+
   @Input() apiUrl: string = '';
   data$ = combineLatest({
     isLoading: this.store.select(selectIsLoading),
     error: this.store.select(selectError),
     stream: this.store.select(selectStreamData),
   });
+
   limit = environment.limit;
   baseUrl = this.router.url.split('?')[0];
   currentPage: number = 0;
+
   constructor(
     private store: Store,
     private router: Router,
     private route: ActivatedRoute
   ) { }
+
   fetchStream(): void {
     const offset = this.currentPage * this.limit - this.limit;
     const parsedUrl = queryString.parseUrl(this.apiUrl);
